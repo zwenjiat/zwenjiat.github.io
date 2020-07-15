@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #can1{border: 1px solid red;margin: 30px;float: left;}
+    .box1{border: 1px solid blue;margin: 30px 10px;float: left;line-height: 40px;}
+    
+    </style>
+    <script src="./02-mouseEvent.js"></script>
+    <script>    
+    window.onload = function(){
+        //给画布添加鼠标事件
+        MouseEvent.mouse(can1,mousemove1,mousedown1,function(e){
+            x3.value=e.points.dx;
+            y3.value=e.points.dy;
+        });
+        
+        //鼠标移动拿到坐标之后去做的事情
+        function mousemove1(e){
+            //画圆-跟随鼠标移动
+            var shape = can1.getContext('2d');
+            shape.clearRect(0,0,300,300);//清屏
+            shape.beginPath();
+            shape.fillStyle='red';
+            shape.arc(e.points.dx,e.points.dy,5,0,2*Math.PI);
+            shape.fill();
+            shape.closePath();
+
+            x1.value=e.points.dx;
+            y1.value=e.points.dy;
+        }
+        //鼠标按下后去做的事情
+         function mousedown1(e){
+            x2.value=e.points.dx;
+            y2.value=e.points.dy;
+        }
+        //
+         function mouseup1(e){
+            x3.value=e.points.dx;
+            y3.value=e.points.dy;
+        }
+    }
+    </script>
+</head>
+<body>
+    <canvas id="can1" height="300"></canvas>
+    <div class="box1">
+        <h3>鼠标移动</h3>
+        <p>x坐标：<input type="text" id="x1"></p>
+        <p>y坐标：<input type="text" id="y1"></p>
+        <h3>鼠标按下</h3>
+        <p>x坐标：<input type="text" id="x2"></p>
+        <p>y坐标：<input type="text" id="y2"></p>
+        <h3>鼠标弹起</h3>
+        <p>x坐标：<input type="text" id="x3"></p>
+        <p>y坐标：<input type="text" id="y3"></p>
+    </div>
+</body>
+</html>
